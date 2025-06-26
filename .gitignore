@@ -1,0 +1,39 @@
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.log
+
+# Arquivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos de backup
+*.bak
+*.backup
+
+# Arquivos de configuração local
+config.php
+.env
+
+# Arquivos de cache
+cache/
+tmp/
+
+# Arquivos de upload (se houver)
+uploads/
+files/
+
+# Arquivos de dependências (se usar composer)
+vendor/
+composer.lock
+
+# Arquivos de build
+dist/
+build/ 
