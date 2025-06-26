@@ -320,88 +320,47 @@ document.addEventListener('DOMContentLoaded', function() {
         carouselTrack.addEventListener('mouseleave', function() {
             this.style.animationPlayState = 'running';
         });
-        
-        // Adicionar controles de navegação (opcional)
-        const companiesSection = document.querySelector('.companies-section');
-        if (companiesSection) {
-            // Adicionar indicadores de progresso
-            const progressBar = document.createElement('div');
-            progressBar.className = 'carousel-progress';
-            progressBar.style.cssText = `
-                position: absolute;
-                bottom: 10px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 100px;
-                height: 4px;
-                background: rgba(102, 126, 234, 0.3);
-                border-radius: 2px;
-                overflow: hidden;
-            `;
-            
-            const progressFill = document.createElement('div');
-            progressFill.style.cssText = `
-                height: 100%;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                border-radius: 2px;
-                animation: progress 30s linear infinite;
-            `;
-            
-            progressBar.appendChild(progressFill);
-            companiesSection.appendChild(progressBar);
-            
-            // Pausar progresso quando o carrossel é pausado
-            carouselTrack.addEventListener('mouseenter', function() {
-                progressFill.style.animationPlayState = 'paused';
-            });
-            
-            carouselTrack.addEventListener('mouseleave', function() {
-                progressFill.style.animationPlayState = 'running';
-            });
-        }
     }
-    
-    // Adicionar keyframes para a barra de progresso
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes progress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-    `;
-    document.head.appendChild(style);
 
     // Carregar empresas no carrossel
     const companiesCarousel = document.getElementById('companies-carousel');
     if (companiesCarousel) {
         const companies = [
-            { name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png' },
-            { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/2560px-Microsoft_logo_%282012%29.svg.png' },
-            { name: 'Apple', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Apple_logo.svg/2560px-Apple_logo.svg.png' },
-            { name: 'Amazon', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png' },
-            { name: 'IBM', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/2560px-IBM_logo.svg.png' },
-            { name: 'Intel', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Intel_logo_%282020%2C_light_blue%29.svg/2560px-Intel_logo_%282020%2C_light_blue%29.svg.png' },
-            { name: 'Adobe', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Adobe_Systems_logo.svg/2560px-Adobe_Systems_logo.svg.png' },
-            { name: 'SAP', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/SAP_2011_logo.svg/2560px-SAP_2011_logo.svg.png' },
-            { name: 'Nike', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Nike_logo.svg/2560px-Nike_logo.svg.png' },
-            { name: 'Adidas', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png' },
-            { name: 'Netflix', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Netflix_logo.svg/2560px-Netflix_logo.svg.png' },
-            { name: 'Spotify', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Spotify_logo.svg/2560px-Spotify_logo.svg.png' },
-            { name: 'Tesla', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Tesla_Motors_logo.svg/2560px-Tesla_Motors_logo.svg.png' },
-            { name: 'BMW', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2560px-BMW.svg.png' },
-            { name: 'McDonald\'s', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/McDonald%27s_logo.svg/2560px-McDonald%27s_logo.svg.png' },
-            { name: 'Coca-Cola', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Coca-Cola_logo.svg/2560px-Coca-Cola_logo.svg.png' },
-            { name: 'Steam', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2560px-Steam_icon_logo.svg.png' },
-            { name: 'LinkedIn', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/LinkedIn_Logo.svg/2560px-LinkedIn_Logo.svg.png' }
+            { name: 'Google', logo: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png' },
+            { name: 'Microsoft', logo: 'https://img.icons8.com/color/96/microsoft.png' },
+            { name: 'Apple', logo: 'https://img.icons8.com/color/96/apple-logo.png' },
+            { name: 'Amazon', logo: 'https://img.icons8.com/color/96/amazon.png' },
+            { name: 'IBM', logo: 'https://img.icons8.com/color/96/ibm.png' },
+            { name: 'Intel', logo: 'https://img.icons8.com/color/96/intel.png' },
+            { name: 'Adobe', logo: 'https://img.icons8.com/color/96/adobe-creative-cloud.png' },
+            { name: 'SAP', logo: 'https://img.icons8.com/color/96/sap.png' },
+            { name: 'Nike', logo: 'https://img.icons8.com/color/96/nike.png' },
+            { name: 'Adidas', logo: 'https://img.icons8.com/color/96/adidas.png' },
+            { name: 'Netflix', logo: 'https://img.icons8.com/color/96/netflix.png' },
+            { name: 'Spotify', logo: 'https://img.icons8.com/color/96/spotify.png' },
+            { name: 'Tesla', logo: 'https://img.icons8.com/color/96/tesla.png' },
+            { name: 'BMW', logo: 'https://img.icons8.com/color/96/bmw.png' },
+            { name: 'McDonald\'s', logo: 'https://img.icons8.com/color/96/mcdonalds.png' },
+            { name: 'Coca-Cola', logo: 'https://img.icons8.com/color/96/coca-cola.png' },
+            { name: 'Steam', logo: 'https://img.icons8.com/color/96/steam.png' },
+            { name: 'LinkedIn', logo: 'https://img.icons8.com/color/96/linkedin.png' },
+            { name: 'Facebook', logo: 'https://img.icons8.com/color/96/facebook.png' },
+            { name: 'Instagram', logo: 'https://img.icons8.com/color/96/instagram-new.png' },
+            { name: 'Twitter', logo: 'https://img.icons8.com/color/96/twitter.png' },
+            { name: 'YouTube', logo: 'https://img.icons8.com/color/96/youtube.png' },
+            { name: 'GitHub', logo: 'https://img.icons8.com/color/96/github.png' },
+            { name: 'WhatsApp', logo: 'https://img.icons8.com/color/96/whatsapp.png' }
         ];
 
         // Duplicar empresas para criar o efeito infinito
         const duplicatedCompanies = [...companies, ...companies];
         
-        // Gerar HTML do carrossel
+        // Gerar HTML do carrossel com melhor tratamento de erro
         const carouselHTML = duplicatedCompanies.map(company => `
             <div class="company-logo">
-                <img src="${company.logo}" alt="${company.name}" onerror="this.style.display='none'">
+                <img src="${company.logo}" alt="${company.name}" 
+                     onerror="this.onerror=null; this.src='https://img.icons8.com/color/96/company.png'; this.style.opacity='0.7';"
+                     style="transition: opacity 0.3s ease;">
             </div>
         `).join('');
         

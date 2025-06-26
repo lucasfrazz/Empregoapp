@@ -29,7 +29,5 @@ echo    ATUALIZACAO CONCLUIDA!
 echo ========================================
 echo.
 echo [SUCESSO] Projeto atualizado no GitHub!
-echo [INFO] Repositorio: https://github.com/spacepenapp/Empregoapp
-echo [INFO] Acesse: http://localhost:8000
-echo.
+
 pause
