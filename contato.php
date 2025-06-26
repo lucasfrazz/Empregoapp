@@ -110,7 +110,7 @@
                                 <i class="fas fa-map-marker-alt"></i>
                                 <div>
                                     <h4>Endereço</h4>
-                                    <p>Brasilia, DF - Brasil</p>
+                                    <p>São Paulo, SP - Brasil</p>
                                 </div>
                             </div>
                             
@@ -132,6 +132,8 @@
                                 <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                             </div>
                         </div>
+                        
+                
                     </div>
                 </div>
             </section>

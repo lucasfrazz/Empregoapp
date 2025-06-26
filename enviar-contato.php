@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </html>
         ";
         
-        // Configurar headers do email
+        // Tentar enviar usando função mail() primeiro
         $headers = array();
         $headers[] = "MIME-Version: 1.0";
         $headers[] = "Content-type: text/html; charset=UTF-8";
@@ -88,11 +88,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $headers[] = "Reply-To: {$email}";
         $headers[] = "X-Mailer: PHP/" . phpversion();
         
-        // Tentar enviar o email
-        if (mail($destinatario, $assunto_site, $corpo_email, implode("\r\n", $headers))) {
-            $sucesso = "Mensagem enviada com sucesso! Entraremos em contato em breve.";
+        $mail_sent = mail($destinatario, $assunto_site, $corpo_email, implode("\r\n", $headers));
+        
+        // Se não funcionar, salvar em arquivo de log
+        if (!$mail_sent) {
+            // Criar pasta logs se não existir
+            if (!file_exists('logs')) {
+                mkdir('logs', 0777, true);
+            }
+            
+            // Salvar mensagem em arquivo
+            $log_data = [
+                'data' => date('Y-m-d H:i:s'),
+                'nome' => $nome,
+                'email' => $email,
+                'assunto' => $assunto_nome,
+                'mensagem' => $mensagem,
+                'ip' => $_SERVER['REMOTE_ADDR']
+            ];
+            
+            $log_file = 'logs/contatos_' . date('Y-m-d') . '.json';
+            $existing_logs = [];
+            
+            if (file_exists($log_file)) {
+                $existing_logs = json_decode(file_get_contents($log_file), true) ?: [];
+            }
+            
+            $existing_logs[] = $log_data;
+            file_put_contents($log_file, json_encode($existing_logs, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+            
+            $sucesso = "Mensagem salva com sucesso! Entraremos em contato em breve. (Mensagem salva localmente devido a configuração de email)";
         } else {
-            $erro = "Erro ao enviar mensagem. Por favor, tente novamente ou entre em contato diretamente pelo e-mail.";
+            $sucesso = "Mensagem enviada com sucesso! Entraremos em contato em breve.";
         }
     }
 }
