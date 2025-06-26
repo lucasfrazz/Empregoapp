@@ -17,7 +17,9 @@
             <nav class="nav">
                 <div class="dropdown">
                     <button class="dropdown-btn">
-                        Menu <i class="fas fa-chevron-down"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                        </svg>
                     </button>
                     <div class="dropdown-content">
                         <a href="quem-somos.php">Quem Somos</a>
@@ -51,13 +53,14 @@
                             <div class="feature-item">
                                 <i class="fas fa-search"></i>
                                 <h4>2. Explore Vagas</h4>
-                                <p>Navegue pelos cards de vagas e deslize para direita (curtir) ou esquerda (pular)</p>
+                                <p>Navegue pelos cards de vagas deslizando para direita (curtir) e esquerda (pular) ou automatize a candidatura</p>
                             </div>
                             <div class="feature-item">
                                 <i class="fas fa-handshake"></i>
                                 <h4>3. Conecte-se</h4>
-                                <p>Quando houver match, você e a empresa podem iniciar uma conversa</p>
+                                <p>Você e a empresa podem iniciar uma conversa</p>
                             </div>
+                            
                             <div class="feature-item">
                                 <i class="fas fa-briefcase"></i>
                                 <h4>4. Encontre seu Emprego</h4>

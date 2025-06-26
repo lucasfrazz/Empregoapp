@@ -17,7 +17,9 @@
             <nav class="nav">
                 <div class="dropdown">
                     <button class="dropdown-btn">
-                        Menu <i class="fas fa-chevron-down"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                        </svg>
                     </button>
                     <div class="dropdown-content">
                         <a href="quem-somos.php">Quem Somos</a>
@@ -34,10 +36,26 @@
         <div class="container">
             <section class="section">
                 <h1>Contato</h1>
+                
+                <!-- Mensagens de feedback -->
+                <?php if (isset($_GET['sucesso'])): ?>
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        <?php echo htmlspecialchars($_GET['sucesso']); ?>
+                    </div>
+                <?php endif; ?>
+                
+                <?php if (isset($_GET['erro'])): ?>
+                    <div class="alert alert-error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <?php echo htmlspecialchars($_GET['erro']); ?>
+                    </div>
+                <?php endif; ?>
+                
                 <div class="content-wrapper">
                     <div class="contact-form-section">
                         <h3>Entre em Contato</h3>
-                        <form class="contact-form">
+                        <form class="contact-form" method="POST" action="enviar-contato.php">
                             <div class="form-group">
                                 <label for="nome">Nome Completo</label>
                                 <input type="text" id="nome" name="nome" required>
@@ -76,7 +94,7 @@
                                 <i class="fas fa-envelope"></i>
                                 <div>
                                     <h4>E-mail</h4>
-                                    <p>contato@appemprego.com</p>
+                                    <p>spacepenapp@gmail.com</p>
                                 </div>
                             </div>
                             
@@ -92,7 +110,7 @@
                                 <i class="fas fa-map-marker-alt"></i>
                                 <div>
                                     <h4>Endereço</h4>
-                                    <p>São Paulo, SP - Brasil</p>
+                                    <p>Brasilia, DF - Brasil</p>
                                 </div>
                             </div>
                             
