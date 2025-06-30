@@ -366,4 +366,19 @@ document.addEventListener('DOMContentLoaded', function() {
         
         companiesCarousel.innerHTML = carouselHTML;
     }
+
+    // Dropdown responsivo: abrir/fechar via clique, usando classe .open
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownBtn = document.querySelector('.dropdown-btn');
+    if (dropdown && dropdownBtn) {
+        dropdownBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdown.classList.toggle('open');
+        });
+        document.addEventListener('click', function(e) {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('open');
+            }
+        });
+    }
 }); 

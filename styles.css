@@ -30,6 +30,7 @@ body {
 
 .header .container {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
@@ -86,15 +87,20 @@ body {
 }
 
 .dropdown-content {
-    display: none;
     position: absolute;
-    right: 0;
+    left: 50%;
+    top: 100%;
     background: white;
     min-width: 200px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
-    z-index: 1;
+    z-index: 9999;
     overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, -10px);
+    transition: all 0.6s ease;
 }
 
 .dropdown-content a {
@@ -110,8 +116,13 @@ body {
     color: #667eea;
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content,
+.dropdown-content[style*="opacity: 1"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
 }
 
 /* Hero Section com imagem de fundo */
@@ -122,6 +133,8 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    margin-bottom: 0;
+    padding-bottom: 120px;
 }
 
 .background-image {
@@ -852,22 +865,17 @@ body {
     margin-right: auto;
 }
 
-.companies-grid {
-    position: relative;
+.companies-grid, .companies-carousel {
+    max-width: 100%;
     overflow: hidden;
-    margin-bottom: 60px;
-    padding: 20px 0;
-}
-
-.companies-carousel {
-    width: 100%;
-    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .carousel-track {
     display: flex;
+    width: max-content;
+    min-width: 100%;
     animation: scroll 30s linear infinite;
-    width: calc(200px * 36); /* 18 empresas * 2 (duplicadas) = 36 */
 }
 
 .carousel-track:hover {
@@ -1246,4 +1254,170 @@ body {
     .alert i {
         font-size: 16px;
     }
+}
+
+/* Responsividade geral */
+@media (max-width: 900px) {
+    .hero-content {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+    .person-phone {
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .hero-text {
+        text-align: center;
+    }
+    .companies-content {
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .header .container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 5px;
+    }
+    .logo h2 {
+        font-size: 1.1rem;
+    }
+    .dropdown-btn {
+        z-index: 10000;
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+    .dropdown-content {
+        min-width: 120px;
+        width: 90vw;
+        left: 50%;
+        transform: translate(-50%, -10px);
+        font-size: 1rem;
+    }
+    .hero-section {
+        min-height: 70vh;
+        padding-top: 80px;
+    }
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+    .cta-button {
+        font-size: 1rem;
+        padding: 10px 18px;
+    }
+    .phone-container {
+        width: 220px;
+        height: 400px;
+        padding: 10px;
+    }
+    .card {
+        width: 98%;
+        height: 90%;
+        padding: 10px;
+    }
+    .companies-section {
+        padding: 20px 0;
+    }
+    .companies-content h2 {
+        font-size: 1.2rem;
+    }
+    .companies-content > p {
+        font-size: 1rem;
+    }
+    .carousel-track {
+        gap: 10px;
+    }
+    .company-logo img {
+        width: 48px;
+        height: 48px;
+    }
+    .stat-number {
+        font-size: 1.1rem;
+    }
+    .stat-label {
+        font-size: 0.9rem;
+    }
+    .social-section {
+        padding: 20px 0;
+    }
+    .social-content h2 {
+        font-size: 1.2rem;
+    }
+    .social-content p {
+        font-size: 1rem;
+    }
+    .social-link-main span {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .logo h2 {
+        font-size: 0.9rem;
+    }
+    .dropdown-content {
+        min-width: 110px;
+        font-size: 0.85rem;
+    }
+    .cta-button {
+        font-size: 0.9rem;
+        padding: 8px 10px;
+    }
+    .phone-container {
+        width: 150px;
+        height: 280px;
+    }
+    .card {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .header .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+    }
+    .logo {
+        margin-bottom: 5px;
+    }
+    .nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .dropdown {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: relative;
+    }
+    .dropdown-content {
+        left: 50% !important;
+        right: auto !important;
+        transform: translate(-50%, -10px) !important;
+        min-width: 120px;
+        width: 90vw;
+        font-size: 1rem;
+    }
+    .dropdown-btn {
+        z-index: 10000;
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        margin: 0 auto;
+    }
+}
+
+/* Dropdown sempre visível quando .open */
+.dropdown.open .dropdown-content {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translate(-50%, 0) !important;
 } 

@@ -11,9 +11,6 @@
     <!-- Header com dropdown menu -->
     <header class="header">
         <div class="container">
-            <div class="logo">
-                <h2><a href="index.php" style="text-decoration: none; color: inherit;">App de Emprego</a></h2>
-            </div>
             <nav class="nav">
                 <div class="dropdown">
                     <button class="dropdown-btn">
@@ -28,6 +25,9 @@
                     </div>
                 </div>
             </nav>
+            <div class="logo">
+                <h2><a href="index.php" style="text-decoration: none; color: inherit;">App de Emprego</a></h2>
+            </div>
         </div>
     </header>
 
