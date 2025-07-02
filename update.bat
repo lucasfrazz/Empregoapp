@@ -6,7 +6,7 @@ echo ========================================
 echo.
 echo Configurando repositorio remoto...
 git remote remove origin 2>nul
-git remote add origin https://github.com/spacepenapp/Empregoapp.git
+git remote add origin https://github.com/lucasfrazz/Empregoapp.git
 echo.
 echo Verificando status do repositorio...
 git status
