@@ -1,3 +1,15 @@
+<?php
+// Iniciar sessão para proteção
+session_start();
+
+// Verificação básica de segurança (você pode adicionar autenticação aqui)
+// Por enquanto, apenas verificar se é uma requisição válida
+if (!isset($_SERVER['HTTP_REFERER']) && !isset($_GET['admin'])) {
+    // Redirecionar para página principal se não vier de uma página válida
+    header('Location: index.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -197,9 +209,12 @@
                         $files = glob($logs_dir . '/contatos_*.json');
                         
                         foreach ($files as $file) {
-                            $file_data = json_decode(file_get_contents($file), true);
-                            if ($file_data) {
-                                $messages = array_merge($messages, $file_data);
+                            // Verificar se o arquivo é legível e válido
+                            if (is_readable($file) && filesize($file) > 0) {
+                                $file_data = json_decode(file_get_contents($file), true);
+                                if ($file_data && is_array($file_data)) {
+                                    $messages = array_merge($messages, $file_data);
+                                }
                             }
                         }
                         

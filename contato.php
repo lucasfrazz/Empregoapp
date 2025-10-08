@@ -38,7 +38,17 @@
                 <h1>Contato</h1>
                 
                 <!-- Mensagens de feedback -->
-                <?php if (isset($_GET['sucesso'])): ?>
+                <?php 
+// Iniciar sessão para proteção CSRF
+session_start();
+
+// Gerar token CSRF se não existir
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+?>
+
+<?php if (isset($_GET['sucesso'])): ?>
                     <div class="alert alert-success">
                         <i class="fas fa-check-circle"></i>
                         <?php echo htmlspecialchars($_GET['sucesso']); ?>
@@ -56,6 +66,7 @@
                     <div class="contact-form-section">
                         <h3>Entre em Contato</h3>
                         <form class="contact-form" method="POST" action="enviar-contato.php">
+                            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                             <div class="form-group">
                                 <label for="nome">Nome Completo</label>
                                 <input type="text" id="nome" name="nome" required>
@@ -94,7 +105,7 @@
                                 <i class="fas fa-envelope"></i>
                                 <div>
                                     <h4>E-mail</h4>
-                                    <p>spacepenapp@gmail.com</p>
+                                    <p>seu-email@exemplo.com</p>
                                 </div>
                             </div>
                             
@@ -102,7 +113,7 @@
                                 <i class="fas fa-phone"></i>
                                 <div>
                                     <h4>Telefone</h4>
-                                    <p>(11) 99999-9999</p>
+                                    <p>(XX) XXXXX-XXXX</p>
                                 </div>
                             </div>
                             
@@ -110,7 +121,7 @@
                                 <i class="fas fa-map-marker-alt"></i>
                                 <div>
                                     <h4>Endereço</h4>
-                                    <p>Brasilia,DF - Brasil</p>
+                                    <p>Sua Cidade, UF - Brasil</p>
                                 </div>
                             </div>
                             

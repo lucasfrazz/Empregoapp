@@ -1,22 +1,39 @@
 <?php
 // Configurações de email
-$destinatario = "spacepenapp@gmail.com";
+$destinatario = "seu-email@exemplo.com"; // ALTERE AQUI: Configure seu email
 $assunto_site = "App de Emprego - Nova Mensagem de Contato";
+
+// Iniciar sessão para proteção CSRF
+session_start();
+
+// Gerar token CSRF se não existir
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
 // Verificar se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // Pegar os dados do formulário
-    $nome = isset($_POST['nome']) ? trim($_POST['nome']) : '';
-    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
-    $assunto = isset($_POST['assunto']) ? trim($_POST['assunto']) : '';
-    $mensagem = isset($_POST['mensagem']) ? trim($_POST['mensagem']) : '';
+    // Verificar token CSRF
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        $erro = "Token de segurança inválido. Tente novamente.";
+    } else {
     
-    // Validação básica
+    // Pegar os dados do formulário com sanitização
+    $nome = isset($_POST['nome']) ? trim(strip_tags($_POST['nome'])) : '';
+    $email = isset($_POST['email']) ? trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) : '';
+    $assunto = isset($_POST['assunto']) ? trim(strip_tags($_POST['assunto'])) : '';
+    $mensagem = isset($_POST['mensagem']) ? trim(strip_tags($_POST['mensagem'])) : '';
+    
+    // Validação e sanitização avançada
     if (empty($nome) || empty($email) || empty($assunto) || empty($mensagem)) {
         $erro = "Por favor, preencha todos os campos obrigatórios.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $erro = "Por favor, insira um e-mail válido.";
+    } elseif (strlen($nome) > 100 || strlen($email) > 100 || strlen($assunto) > 50 || strlen($mensagem) > 1000) {
+        $erro = "Alguns campos excedem o tamanho máximo permitido.";
+    } elseif (!preg_match('/^[a-zA-ZÀ-ÿ\s]+$/', $nome)) {
+        $erro = "O nome contém caracteres inválidos.";
     } else {
         
         // Mapear assuntos para nomes mais amigáveis
@@ -121,6 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $sucesso = "Mensagem enviada com sucesso! Entraremos em contato em breve.";
         }
+    }
     }
 }
 
