@@ -11,6 +11,9 @@ config.php
 *.tmp
 *.temp
 
+# Arquivos específicos do desenvolvedor
+update.bat
+
 # Arquivos de backup
 *.bak
 *.backup
